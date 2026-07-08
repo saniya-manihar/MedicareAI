@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medicare AI</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gradient-to-br from-blue-900 via-blue-700 to-cyan-500 min-h-screen text-white">
+
+    <!-- Navbar -->
+    <nav class="flex justify-between items-center px-10 py-5">
+
+        <h1 class="text-3xl font-bold">
+            🩺 Medicare AI
+        </h1>
+
+        <div class="space-x-4">
+            <a href="/login"
+               class="bg-white text-blue-700 px-5 py-2 rounded-lg font-semibold hover:bg-gray-200">
+                Login
+            </a>
+
+            <a href="/register"
+               class="bg-green-500 px-5 py-2 rounded-lg font-semibold hover:bg-green-600">
+                Register
+            </a>
+        </div>
+
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="max-w-6xl mx-auto px-8 py-20 flex flex-col md:flex-row items-center">
+
+        <!-- Left -->
+        <div class="md:w-1/2">
+
+            <h2 class="text-5xl font-bold leading-tight mb-6">
+
+            Your Intelligent Healthcare Assistant
+
+            </h2>
+
+            <p class="text-lg text-blue-100 mb-8">
+
+                Get instant answers to your medical questions using
+                Retrieval-Augmented Generation (RAG) and Large Language Models.
+
+            </p>
+
+           
+        </div>
+
+        <!-- Right -->
+        <div class="md:w-1/2 flex justify-center mt-10 md:mt-0">
+
+            <div class="bg-white/20 backdrop-blur-lg rounded-3xl p-10 shadow-2xl">
+
+                <div class="text-7xl text-center">
+                    🩺
+                </div>
+
+                <h3 class="text-2xl font-bold text-center mt-4">
+                    Medicare AI
+                </h3>
+
+                <p class="text-center text-blue-100 mt-2">
+
+                    Smart Healthcare Assistant
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Features -->
+    <section class="max-w-6xl mx-auto px-8 pb-20">
+
+        <h2 class="text-3xl font-bold text-center mb-10">
+
+            Features
+
+        </h2>
+
+        <div class="grid md:grid-cols-3 gap-8">
+
+            <div class="bg-white/20 backdrop-blur-lg p-6 rounded-2xl">
+
+                <h3 class="text-xl font-bold mb-3">
+                    🤖 AI Chatbot
+                </h3>
+
+                <p>
+                    Ask medical questions and receive AI-powered answers using RAG.
+                </p>
+
+            </div>
+
+            <div class="bg-white/20 backdrop-blur-lg p-6 rounded-2xl">
+
+                <h3 class="text-xl font-bold mb-3">
+                    📄 Medical Knowledge
+                </h3>
+
+                <p>
+                    Answers are generated using trusted medical documents stored in the knowledge base.
+                </p>
+
+            </div>
+
+            <div class="bg-white/20 backdrop-blur-lg p-6 rounded-2xl">
+
+                <h3 class="text-xl font-bold mb-3">
+                    🔒 Secure Login
+                </h3>
+
+                <p>
+                    User authentication with Flask Sessions and SQLite database.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center py-8 border-t border-white/20">
+
+<p class="text-lg">
+© 2026 Medicare AI
+</p>
+
+<p class="text-blue-100 mt-2">
+Built with ❤️ using Flask, LangChain, Ollama and Tailwind CSS
+</p>
+
+</footer>
+
+</body>
+</html>
