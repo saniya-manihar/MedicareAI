@@ -85,7 +85,7 @@ def ask():
         question=question
     )
 
-              
+             
             
 @app.route("/logout")
 def logout():
