@@ -53,11 +53,16 @@ def login():
                         print("Not matched")
                   
               else :
-                   print("User Not Exist")
+                   return render_template(
+        "login.html",
+        error="Account not found. Please register first.")
               
               conn.close()
 
-          return render_template("login.html")
+          return render_template(
+    "login.html",
+    error="Incorrect password."
+)
               
           
           
@@ -93,30 +98,29 @@ def logout():
      return redirect(url_for("login"))
    
          
-
-       
-
-    
-@app.route("/register",methods=["GET","POST"])
+@app.route("/register", methods=["GET", "POST"])
 def register():
-   
-     
-     if(request.method=="POST"):
+
+    if request.method == "POST":
         conn = sqlite3.connect("medicare.db")
-        cursor=conn.cursor()
-        email=request.form["email"]
-        password=request.form["password"]
-        name=request.form["name"]
-        print("Email :", email)
-        print("Password :", password)
-        print("Name :", name)
+        cursor = conn.cursor()
+
+        name = request.form["name"]
+        email = request.form["email"]
+        password = request.form["password"]
+
         cursor.execute(
-    "INSERT INTO users(name,email,password) VALUES(?,?,?)",
-    (name, email, password)
-)
+            "INSERT INTO users(name,email,password) VALUES(?,?,?)",
+            (name, email, password)
+        )
+
         conn.commit()
         conn.close()
-     return render_template("register.html")
+
+        return redirect(url_for("login"))
+
+    return render_template("register.html")
+       
 
 if __name__ == "__main__":
     create_database()
