@@ -1,6 +1,10 @@
 from langchain_chroma import Chroma
 from langchain_huggingface import HuggingFaceEmbeddings
-from langchain_ollama import ChatOllama
+from langchain_groq import ChatGroq
+from dotenv import load_dotenv
+import os
+load_dotenv()
+
 embedding = HuggingFaceEmbeddings(
     model_name="sentence-transformers/all-MiniLM-L6-v2"
 )
@@ -11,10 +15,11 @@ vector_db = Chroma(
 retriever = vector_db.as_retriever(
     search_kwargs={"k": 2}
 )
-llm = ChatOllama(
-    model="llama3.2"
-)
 
+llm = ChatGroq(
+    model="llama-3.3-70b-versatile",
+    api_key=os.getenv("GROQ_API_KEY")
+)
 
 def ask_question(question):
 

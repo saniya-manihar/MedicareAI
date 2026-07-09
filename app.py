@@ -28,43 +28,56 @@ def create_database():
 def home():
     return render_template("index.html")
 
-@app.route("/login",methods=["GET","POST"])
-
-
+@app.route("/login", methods=["GET", "POST"])
 def login():
-           
-          if(request.method=="POST"):
-              conn= sqlite3.connect("medicare.db")
-              cursor=conn.cursor()
-              email=request.form["email"]
-              password=request.form["password"]
-              print("Email :", email)
-              print("Password :", password)
-              cursor.execute("select * from users where email=?",(email,))
-              user=cursor.fetchone()
 
-              if user:
-                   print("User Found")
-                   if (password==user[3]):
-                        print("password match")
-                        session["user"] = email
-                        return redirect(url_for("dashboard"))
-                   else :
-                        print("Not matched")
-                  
-              else :
-                   return render_template(
-        "login.html",
-        error="Account not found. Please register first.")
-              
-              conn.close()
+    if request.method == "POST":
 
-          return render_template(
-    "login.html",
-    error="Incorrect password."
-)
-              
-          
+        conn = sqlite3.connect("medicare.db")
+        cursor = conn.cursor()
+
+        email = request.form["email"]
+        password = request.form["password"]
+
+        print("Email:", email)
+        print("Password:", password)
+
+        cursor.execute(
+            "SELECT * FROM users WHERE email=?",
+            (email,)
+        )
+
+        user = cursor.fetchone()
+
+        conn.close()
+
+        if user:
+
+            print("User Found")
+
+            if password == user[3]:
+
+                print("Password Match")
+
+                session["user"] = email
+
+                return redirect(url_for("dashboard"))
+
+            else:
+
+                return render_template(
+                    "login.html",
+                    error="Incorrect password."
+                )
+
+        else:
+
+            return render_template(
+                "login.html",
+                error="Account not found. Please register first."
+            )
+
+    return render_template("login.html")     
           
           
 @app.route("/dashboard")
