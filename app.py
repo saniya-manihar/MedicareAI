@@ -4,7 +4,6 @@ from rag.chatbot import ask_question
 app=Flask(__name__)
 app.secret_key = "medicare123"
 
-
 def create_database():
 
     conn = sqlite3.connect("medicare.db")
@@ -23,7 +22,9 @@ def create_database():
     conn.commit()
 
     conn.close()
+    print("✅ Users table created")
 
+create_database()
 @app.route("/")
 def home():
     return render_template("index.html")
@@ -34,6 +35,7 @@ def login():
     if request.method == "POST":
 
         conn = sqlite3.connect("medicare.db")
+        print("Connected to database")
         cursor = conn.cursor()
 
         email = request.form["email"]
@@ -135,10 +137,8 @@ def register():
     return render_template("register.html")
        
 
+
 if __name__ == "__main__":
-    create_database()
-    app.run(debug=True)
-
-
-
+  
+    app.run(host="0.0.0.0", port=5000)
 
