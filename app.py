@@ -117,6 +117,7 @@ def logout():
 def register():
 
     if request.method == "POST":
+
         conn = sqlite3.connect("medicare.db")
         cursor = conn.cursor()
 
@@ -132,11 +133,12 @@ def register():
         conn.commit()
         conn.close()
 
-        return redirect(url_for("login"))
+        # Automatically login
+        session["user"] = email
+
+        return redirect(url_for("dashboard"))
 
     return render_template("register.html")
-       
-
 
 if __name__ == "__main__":
   
