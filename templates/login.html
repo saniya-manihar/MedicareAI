@@ -8,39 +8,42 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="min-h-screen bg-gradient-to-br from-blue-900 via-blue-700 to-cyan-500 flex items-center justify-center">
+<body class="min-h-screen bg-gradient-to-br from-blue-900 via-blue-700 to-cyan-500 flex items-center justify-center px-4 py-10">
 
     <div class="w-full max-w-md">
 
         <!-- Logo -->
-        <div class="text-center mb-6">
+        <div class="text-center mb-8">
 
-            <h1 class="text-4xl font-bold text-white">
+            <h1 class="text-3xl sm:text-4xl font-bold text-white whitespace-nowrap">
                 🩺 Medicare AI
             </h1>
 
-            <p class="text-blue-100 mt-2">
+            <p class="text-sm sm:text-base text-blue-100 mt-2">
                 AI Powered Medical Assistant
             </p>
 
         </div>
 
-        <!-- Card -->
-        <div class="bg-white/20 backdrop-blur-lg rounded-2xl shadow-2xl p-8 border border-white/30">
+        <!-- Login Card -->
+        <div class="bg-white/20 backdrop-blur-lg rounded-3xl shadow-2xl border border-white/30 p-6 sm:p-8">
 
-            <h2 class="text-3xl font-bold text-center text-white mb-8">
+            <h2 class="text-3xl sm:text-4xl font-bold text-center text-white mb-8">
                 Welcome Back
             </h2>
-{% if error %}
-<div class="bg-red-500 text-white p-3 rounded-lg mb-4">
-    {{ error }}
-</div>
-{% endif %}
-            <form action="/login" method="POST">
 
-                <div class="mb-5">
+            {% if error %}
+            <div class="bg-red-500 text-white text-center rounded-xl p-3 mb-6">
+                {{ error }}
+            </div>
+            {% endif %}
 
-                    <label class="text-white font-semibold">
+            <form action="/login" method="POST" class="space-y-6">
+
+                <!-- Email -->
+                <div>
+
+                    <label class="block text-white font-semibold mb-2">
                         Email
                     </label>
 
@@ -48,13 +51,17 @@
                         type="email"
                         name="email"
                         placeholder="Enter your email"
-                        class="w-full mt-2 p-3 rounded-lg outline-none">
+                        required
+                        class="w-full rounded-xl px-4 py-3 text-gray-800
+                               focus:outline-none focus:ring-4
+                               focus:ring-blue-300">
 
                 </div>
 
-                <div class="mb-6">
+                <!-- Password -->
+                <div>
 
-                    <label class="text-white font-semibold">
+                    <label class="block text-white font-semibold mb-2">
                         Password
                     </label>
 
@@ -62,12 +69,19 @@
                         type="password"
                         name="password"
                         placeholder="Enter your password"
-                        class="w-full mt-2 p-3 rounded-lg outline-none">
+                        required
+                        class="w-full rounded-xl px-4 py-3 text-gray-800
+                               focus:outline-none focus:ring-4
+                               focus:ring-blue-300">
 
                 </div>
 
+                <!-- Login Button -->
                 <button
-                    class="w-full bg-blue-700 hover:bg-blue-800 text-white py-3 rounded-lg font-bold transition">
+                    type="submit"
+                    class="w-full bg-blue-700 hover:bg-blue-800
+                           rounded-xl py-3 text-white font-semibold
+                           transition duration-300">
 
                     Login
 
@@ -75,12 +89,13 @@
 
             </form>
 
-            <p class="text-center text-white mt-6">
+            <!-- Register Link -->
+            <p class="text-center text-white text-sm sm:text-base mt-6">
 
                 Don't have an account?
 
                 <a href="/register"
-                   class="font-bold underline">
+                   class="font-semibold underline hover:text-blue-200 transition">
 
                     Register
 

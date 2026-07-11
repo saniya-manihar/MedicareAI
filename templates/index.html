@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,20 +12,19 @@
 <body class="bg-gradient-to-br from-blue-900 via-blue-700 to-cyan-500 min-h-screen text-white">
 
     <!-- Navbar -->
-    <nav class="flex justify-between items-center px-10 py-5">
+    <nav class="flex justify-between items-center px-4 md:px-10 py-4">
 
-        <h1 class="text-3xl font-bold">
+        <h1 class="text-xl md:text-3xl font-bold whitespace-nowrap">
             🩺 Medicare AI
         </h1>
 
-        <div class="space-x-4">
+        <div class="flex gap-2">
             <a href="/login"
-               class="bg-white text-blue-700 px-5 py-2 rounded-lg font-semibold hover:bg-gray-200">
+                class="bg-white text-blue-700 px-3 md:px-5 py-2 rounded-lg text-sm md:text-base font-semibold">
                 Login
             </a>
 
-            <a href="/register"
-               class="bg-green-500 px-5 py-2 rounded-lg font-semibold hover:bg-green-600">
+            <a href="/register" class="bg-green-500 px-3 md:px-5 py-2 rounded-lg text-sm md:text-base font-semibold">
                 Register
             </a>
         </div>
@@ -32,14 +32,13 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="max-w-6xl mx-auto px-8 py-20 flex flex-col md:flex-row items-center">
+    <section class="max-w-6xl mx-auto px-5 md:px-8 py-12 md:py-20 flex flex-col md:flex-row items-center">
 
         <!-- Left -->
         <div class="md:w-1/2">
+            <h2 class="text-4xl md:text-5xl font-bold leading-tight">
 
-            <h2 class="text-5xl font-bold leading-tight mb-6">
-
-            Your Intelligent Healthcare Assistant
+                Your Intelligent Healthcare Assistant
 
             </h2>
 
@@ -50,7 +49,7 @@
 
             </p>
 
-           
+
         </div>
 
         <!-- Right -->
@@ -130,17 +129,18 @@
     </section>
 
     <!-- Footer -->
-    <footer class="text-center py-8 border-t border-white/20">
+    <footer class="text-center py-6 border-t border-white/20">
 
-<p class="text-lg">
+<p class="text-base md:text-lg">
 © 2026 Medicare AI
 </p>
 
-<p class="text-blue-100 mt-2">
-Built with ❤️ using Flask, LangChain, Ollama and Tailwind CSS
+<p class="text-sm md:text-base text-blue-100 mt-2">
+Built with ❤️ using Flask, LangChain, Groq and Tailwind CSS
 </p>
 
 </footer>
 
 </body>
+
 </html>

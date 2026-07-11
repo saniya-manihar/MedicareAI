@@ -1,100 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medicare AI Dashboard</title>
+
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>Medical AI Dashboard</title>
 </head>
 
 <body class="bg-slate-100 min-h-screen">
 
-    <!-- Navbar -->
-    <nav class="bg-blue-700 text-white shadow-lg">
-        <div class="max-w-6xl mx-auto flex justify-between items-center p-4">
+<!-- Navbar -->
 
-            <h1 class="text-2xl font-bold">
-                🩺 Medicare AI
-            </h1>
+<nav class="bg-blue-700 shadow-lg">
 
-            <a href="/logout" class="bg-white text-blue-700 px-4 py-2 rounded-lg font-semibold hover:bg-gray-200">
-                Logout
-            </a>
+<div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
 
-        </div>
-    </nav>
+<h1 class="text-xl sm:text-2xl font-bold text-white whitespace-nowrap">
+🩺 Medicare AI
+</h1>
 
-    <!-- Main Container -->
-    <div class="max-w-4xl mx-auto mt-10">
+<a href="/logout"
+class="bg-white text-blue-700 px-4 py-2 rounded-xl font-semibold hover:bg-gray-200 transition">
 
-        <div class="bg-white rounded-xl shadow-lg p-8">
+Logout
 
-            <h2 class="text-3xl font-bold text-center text-blue-700 mb-6">
-                Hello 👋
+</a>
 
-                How can I help you today?
-            </h2>
+</div>
 
-            <form action="/ask" method="POST">
+</nav>
 
-                <div class="flex gap-3">
+<!-- Main -->
 
-                    <input type="text" name="question"
-                        placeholder="Ask your medical question..."
-                        class="flex-1 border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        required>
+<div class="max-w-4xl mx-auto px-4 py-10">
 
-                    <button class="bg-blue-700 text-white px-6 rounded-lg hover:bg-blue-800">
+<div class="bg-white rounded-3xl shadow-xl p-6 sm:p-8">
 
-                        Ask
+<h2 class="text-3xl sm:text-4xl font-bold text-center text-blue-700 mb-8">
 
-                    </button>
+Hello 👋
 
-                </div>
+<br>
 
-            </form>
+<span class="text-xl sm:text-2xl text-gray-700">
 
-        </div>
-        {% if question %}
+How can I help you today?
 
-        <div class="bg-blue-100 rounded-xl p-5 mt-2 mb-4 shadow">
+</span>
 
-            <h3 class="font-bold text-blue-700">
-                👤 You
-            </h3>
+</h2>
 
-            <p class="mt-2">
-                {{ question }}
-            </p>
+<form action="/ask" method="POST">
 
-        </div>
+<div class="flex flex-col sm:flex-row gap-4">
 
-        {% endif %}
-        {% if answer %}
+<input
+type="text"
+name="question"
+placeholder="Ask your medical question..."
+required
+class="flex-1 border rounded-xl px-4 py-3
+focus:outline-none focus:ring-4 focus:ring-blue-300">
 
-        <div class="bg-white shadow-lg rounded-xl mt-8 p-6">
+<button
+type="submit"
+class="bg-blue-700 hover:bg-blue-800
+text-white px-8 py-3 rounded-xl
+font-semibold transition">
 
-            <h3 class="text-xl font-bold text-green-600 mb-3">
-                🤖 AI Response
-            </h3>
+Ask
 
-            <p class="text-gray-700 leading-8">
-                {{ answer }}
-            </p>
+</button>
 
-        </div>
+</div>
 
-        {% endif %}
-        <div class="mt-5 text-sm text-gray-500">
+</form>
 
-            ⚠️ This AI assistant is for educational purposes only.
-            Please consult a doctor for medical advice.
+</div>
 
-        </div>
-    </div>
+{% if question %}
 
+<div class="bg-blue-100 rounded-3xl shadow-lg p-6 mt-8">
+
+<h3 class="font-bold text-blue-700 text-lg">
+
+👤 Your Question
+
+</h3>
+
+<p class="mt-3 text-gray-700 leading-7">
+
+{{ question }}
+
+</p>
+
+</div>
+
+{% endif %}
+
+{% if answer %}
+
+<div class="bg-white rounded-3xl shadow-lg p-6 mt-6">
+
+<h3 class="text-2xl font-bold text-green-600 mb-4">
+
+🤖 AI Response
+
+</h3>
+
+<p class="text-gray-700 leading-8 whitespace-pre-line">
+
+{{ answer }}
+
+</p>
+
+</div>
+
+{% endif %}
+
+<div class="bg-yellow-100 border-l-4 border-yellow-500 rounded-xl p-4 mt-8">
+
+<p class="text-sm text-yellow-900">
+
+⚠️ This AI assistant is for educational purposes only.
+Always consult a qualified healthcare professional for medical advice.
+
+</p>
+
+</div>
+
+</div>
 
 </body>
-
 </html>
