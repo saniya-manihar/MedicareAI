@@ -4,7 +4,7 @@ from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_chroma  import Chroma
 from langchain_ollama import ChatOllama
 
-loader=PyMuPDFLoader("data/medical_rag_test.pdf")
+loader=PyMuPDFLoader("data/medical_knowledge.pdf")
 documents=loader.load()
 splitter=RecursiveCharacterTextSplitter(
     chunk_size=500,

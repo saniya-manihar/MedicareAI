@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Profile | Medicare AI</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        .profile-card{
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float{
+            0%{
+                transform: translateY(0px);
+            }
+            50%{
+                transform: translateY(-8px);
+            }
+            100%{
+                transform: translateY(0px);
+            }
+        }
+
+        .heading{
+            background: linear-gradient(90deg,#ffffff,#dbeafe,#ffffff);
+            background-size:300% 300%;
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+            animation: glow 4s ease infinite;
+        }
+
+        @keyframes glow{
+            0%{
+                background-position:0% 50%;
+            }
+            50%{
+                background-position:100% 50%;
+            }
+            100%{
+                background-position:0% 50%;
+            }
+        }
+    </style>
+</head>
+
+<body class="min-h-screen bg-gradient-to-br from-blue-900 via-blue-700 to-cyan-500 flex items-center justify-center px-4">
+
+    <div class="profile-card bg-white/20 backdrop-blur-lg rounded-3xl shadow-2xl p-8 w-full max-w-lg">
+
+        <h1 class="heading text-4xl font-bold text-center mb-2">
+            🩺 Patient Profile
+        </h1>
+
+        <p class="text-center text-blue-100 mb-8">
+            Complete your medical profile for better AI recommendations
+        </p>
+
+        <form action="/profile" method="POST" class="space-y-5">
+
+            <div>
+                <label class="block text-white font-semibold mb-2">
+                    Age
+                </label>
+
+                <input
+                    type="number"
+                    name="age"
+                    placeholder="Enter your age"
+                    value="{{ profile[2] if profile else '' }}"
+
+                    class="w-full rounded-xl px-4 py-3 text-gray-800 focus:outline-none focus:ring-4 focus:ring-blue-300"
+                    required>
+            </div>
+
+            <div>
+                <label class="block text-white font-semibold mb-2">
+                    Gender
+                </label>
+
+                <input
+                    type="text"
+                    name="gender"
+                    placeholder="Male / Female / Other"
+                    value="{{ profile[3] if profile else '' }}"
+                    class="w-full rounded-xl px-4 py-3 text-gray-800 focus:outline-none focus:ring-4 focus:ring-blue-300"
+                    required>
+            </div>
+
+            <div>
+                <label class="block text-white font-semibold mb-2">
+                    Blood Group
+                </label>
+
+                <input
+                    type="text"
+                    name="blood_group"
+                    placeholder="Ex: O+, A+, AB-"
+                    value="{{ profile[4] if profile else '' }}"
+                    class="w-full rounded-xl px-4 py-3 text-gray-800 focus:outline-none focus:ring-4 focus:ring-blue-300"
+                    required>
+            </div>
+
+            <div>
+                <label class="block text-white font-semibold mb-2">
+                    Allergies
+                </label>
+
+                <input
+                    type="text"
+                    name="allergies"
+                    placeholder="Ex: Dust, Penicillin"
+                    value="{{ profile[5] if profile else '' }}"
+                    class="w-full rounded-xl px-4 py-3 text-gray-800 focus:outline-none focus:ring-4 focus:ring-blue-300">
+            </div>
+
+            <div>
+                <label class="block text-white font-semibold mb-2">
+                    Medical History
+                </label>
+                
+<textarea
+name="medical_history"
+rows="4"
+class="w-full rounded-xl px-4 py-3 text-gray-800 resize-none focus:outline-none focus:ring-4 focus:ring-blue-300"
+>{{ profile[6] if profile else '' }}</textarea>
+            </div>
+
+          <button
+type="submit"
+class="w-full bg-blue-700 hover:bg-blue-800 transition duration-300 rounded-xl py-3 text-white font-semibold">
+
+    {{ "Update Profile" if profile else "Save Profile" }}
+
+</button>
+
+        </form>
+
+    </div>
+
+</body>
+</html>

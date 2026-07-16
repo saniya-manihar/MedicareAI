@@ -1,136 +1,214 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Medicare AI Dashboard</title>
+    <style>
+        .username {
+            display: inline-block;
+            font-weight: bold;
 
+            background: linear-gradient(90deg,
+                    #2563eb,
+                    #06b6d4,
+                    #3b82f6,
+                    #2563eb);
+
+            background-size: 300% 300%;
+
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+
+            animation:
+                glow 3s ease infinite,
+                float 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+
+        }
+
+        @keyframes float {
+
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-6px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+
+        }
+    </style>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body class="bg-slate-100 min-h-screen">
 
-<!-- Navbar -->
+    <!-- Navbar -->
+    <nav class="bg-blue-700 shadow-lg">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-xl sm:text-2xl font-bold text-white">
+                🩺 Medicare AI
+            </h1>
+            <a href="/profile" class="bg-blue text-white-700 px-4 py-2 rounded-xl font-semibold">
+                Complete Profile
+            </a>
 
-<nav class="bg-blue-700 shadow-lg">
+            <a href="/logout" class="bg-white text-blue-700 px-4 py-2 rounded-xl font-semibold">
+                Logout
+            </a>
+        </div>
+    </nav>
 
-<div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+    <!-- Main Layout -->
+    <div class="max-w-7xl mx-auto flex gap-6 p-6">
 
-<h1 class="text-xl sm:text-2xl font-bold text-white whitespace-nowrap">
-🩺 Medicare AI
-</h1>
+        <!-- Sidebar -->
+        <div class="w-1/4 bg-white rounded-3xl shadow-xl p-6 h-fit">
 
-<a href="/logout"
-class="bg-white text-blue-700 px-4 py-2 rounded-xl font-semibold hover:bg-gray-200 transition">
+            <h2 class="text-2xl font-bold text-blue-700 mb-4">
+                💬 Chats
+            </h2>
 
-Logout
+            <form action="/new_chat" method="POST">
 
-</a>
+                <button type="submit" class="w-full bg-blue-700 text-white py-3 rounded-xl mb-6">
 
-</div>
+                    + New Chat
 
-</nav>
+                </button>
 
-<!-- Main -->
+            </form>
+            <form action="/upload_prescription" method="POST" enctype="multipart/form-data">
 
-<div class="max-w-4xl mx-auto px-4 py-10">
+                <input type="file" name="prescription" accept=".pdf" required>
 
-<div class="bg-white rounded-3xl shadow-xl p-6 sm:p-8">
+                <button type="submit">
+                    Upload Prescription
+                </button>
 
-<h2 class="text-3xl sm:text-4xl font-bold text-center text-blue-700 mb-8">
+            </form>
 
-Hello 👋
+            <!-- Chat titles will come here later -->
 
-<br>
+        </div>
 
-<span class="text-xl sm:text-2xl text-gray-700">
+        <!-- Chat Area -->
+        <div class="w-3/4">
 
-How can I help you today?
+            <!-- Greeting Card -->
+            <div class="bg-white rounded-3xl shadow-xl p-8">
 
-</span>
+                <h2 class="text-4xl font-bold text-center text-blue-700 mb-8">
 
-</h2>
+                    Hello
+                    <span class="username">
+                        {{ user[0]|title }}
+                    </span>
+                    👋
 
-<form action="/ask" method="POST">
+                    <br>
 
-<div class="flex flex-col sm:flex-row gap-4">
+                    <span class="text-2xl text-gray-700">
+                        How can I help you today?
+                    </span>
 
-<input
-type="text"
-name="question"
-placeholder="Ask your medical question..."
-required
-class="flex-1 border rounded-xl px-4 py-3
-focus:outline-none focus:ring-4 focus:ring-blue-300">
+                </h2>
 
-<button
-type="submit"
-class="bg-blue-700 hover:bg-blue-800
-text-white px-8 py-3 rounded-xl
-font-semibold transition">
+                <form action="/ask" method="POST">
 
-Ask
+                    <div class="flex gap-4">
 
-</button>
+                        <input type="text" name="question" placeholder="Ask your medical question..."
+                            class="flex-1 border rounded-xl px-4 py-3" required>
 
-</div>
+                        <button class="bg-blue-700 text-white px-8 rounded-xl">
+                            Ask
+                        </button>
 
-</form>
+                    </div>
 
-</div>
+                </form>
 
-{% if question %}
+            </div>
+            {% if prescription_analysis %}
 
-<div class="bg-blue-100 rounded-3xl shadow-lg p-6 mt-8">
+            <div class="bg-green-100 border border-green-400 rounded-lg p-5 mb-5">
 
-<h3 class="font-bold text-blue-700 text-lg">
+                <h2 class="text-xl font-bold text-green-700 mb-3">
+                    📄 Prescription Analysis
+                </h2>
 
-👤 Your Question
+                <pre class="whitespace-pre-wrap">
+{{ prescription_analysis }}
+    </pre>
 
-</h3>
+            </div>
 
-<p class="mt-3 text-gray-700 leading-7">
+            {% endif %}
 
-{{ question }}
+            <!-- Chat History -->
 
-</p>
+            {% for chat in history %}
 
-</div>
+            <div class="bg-blue-100 rounded-xl p-5 mt-6 shadow">
 
-{% endif %}
+                <h3 class="font-bold text-blue-700">
+                    👤 You
+                </h3>
 
-{% if answer %}
+                <p class="mt-2">
+                    {{ chat[0] }}
+                </p>
 
-<div class="bg-white rounded-3xl shadow-lg p-6 mt-6">
+            </div>
 
-<h3 class="text-2xl font-bold text-green-600 mb-4">
+            <div class="bg-white rounded-xl shadow p-6 mt-3">
 
-🤖 AI Response
+                <h3 class="font-bold text-green-600 text-xl mb-3">
+                    🤖 Medicare AI
+                </h3>
 
-</h3>
+                <p>
+                    {{ chat[1] }}
+                </p>
 
-<p class="text-gray-700 leading-8 whitespace-pre-line">
+            </div>
 
-{{ answer }}
+            {% endfor %}
 
-</p>
+            <!-- Disclaimer -->
 
-</div>
+            <div class="bg-yellow-100 border-l-4 border-yellow-500 rounded-xl p-4 mt-8">
 
-{% endif %}
+                ⚠️ This AI assistant is for educational purposes only.
+                Always consult a qualified healthcare professional.
 
-<div class="bg-yellow-100 border-l-4 border-yellow-500 rounded-xl p-4 mt-8">
+            </div>
 
-<p class="text-sm text-yellow-900">
+        </div>
 
-⚠️ This AI assistant is for educational purposes only.
-Always consult a qualified healthcare professional for medical advice.
-
-</p>
-
-</div>
-
-</div>
+    </div>
 
 </body>
+
 </html>
